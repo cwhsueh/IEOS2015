@@ -1,0 +1,199 @@
+Created by PLY version 3.4 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> command
+Rule 1     command -> svo_cmd
+Rule 2     command -> sv_cmd
+Rule 3     sv_cmd -> WORD action1
+Rule 4     svo_cmd -> WORD action2 NUMBER
+Rule 5     action1 -> TURN ON
+Rule 6     action1 -> TURN OFF
+Rule 7     action1 -> VOLUME UP
+Rule 8     action1 -> VOLUME DOWN
+Rule 9     action1 -> SPEED UP
+Rule 10    action1 -> SPEED DOWN
+Rule 11    action2 -> CHANGE CHANNEL
+
+Terminals, with rules where they appear
+
+CHANGE               : 11
+CHANNEL              : 11
+DOWN                 : 8 10
+NUMBER               : 4
+OFF                  : 6
+ON                   : 5
+SPEED                : 9 10
+TURN                 : 5 6
+UP                   : 7 9
+VOLUME               : 7 8
+WORD                 : 3 4
+error                : 
+
+Nonterminals, with rules where they appear
+
+action1              : 3
+action2              : 4
+command              : 0
+sv_cmd               : 2
+svo_cmd              : 1
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . command
+    (1) command -> . svo_cmd
+    (2) command -> . sv_cmd
+    (4) svo_cmd -> . WORD action2 NUMBER
+    (3) sv_cmd -> . WORD action1
+
+    WORD            shift and go to state 1
+
+    sv_cmd                         shift and go to state 2
+    svo_cmd                        shift and go to state 4
+    command                        shift and go to state 3
+
+state 1
+
+    (4) svo_cmd -> WORD . action2 NUMBER
+    (3) sv_cmd -> WORD . action1
+    (11) action2 -> . CHANGE CHANNEL
+    (5) action1 -> . TURN ON
+    (6) action1 -> . TURN OFF
+    (7) action1 -> . VOLUME UP
+    (8) action1 -> . VOLUME DOWN
+    (9) action1 -> . SPEED UP
+    (10) action1 -> . SPEED DOWN
+
+    CHANGE          shift and go to state 9
+    TURN            shift and go to state 8
+    VOLUME          shift and go to state 7
+    SPEED           shift and go to state 10
+
+    action1                        shift and go to state 5
+    action2                        shift and go to state 6
+
+state 2
+
+    (2) command -> sv_cmd .
+
+    $end            reduce using rule 2 (command -> sv_cmd .)
+
+
+state 3
+
+    (0) S' -> command .
+
+
+
+state 4
+
+    (1) command -> svo_cmd .
+
+    $end            reduce using rule 1 (command -> svo_cmd .)
+
+
+state 5
+
+    (3) sv_cmd -> WORD action1 .
+
+    $end            reduce using rule 3 (sv_cmd -> WORD action1 .)
+
+
+state 6
+
+    (4) svo_cmd -> WORD action2 . NUMBER
+
+    NUMBER          shift and go to state 11
+
+
+state 7
+
+    (7) action1 -> VOLUME . UP
+    (8) action1 -> VOLUME . DOWN
+
+    UP              shift and go to state 13
+    DOWN            shift and go to state 12
+
+
+state 8
+
+    (5) action1 -> TURN . ON
+    (6) action1 -> TURN . OFF
+
+    ON              shift and go to state 15
+    OFF             shift and go to state 14
+
+
+state 9
+
+    (11) action2 -> CHANGE . CHANNEL
+
+    CHANNEL         shift and go to state 16
+
+
+state 10
+
+    (9) action1 -> SPEED . UP
+    (10) action1 -> SPEED . DOWN
+
+    UP              shift and go to state 18
+    DOWN            shift and go to state 17
+
+
+state 11
+
+    (4) svo_cmd -> WORD action2 NUMBER .
+
+    $end            reduce using rule 4 (svo_cmd -> WORD action2 NUMBER .)
+
+
+state 12
+
+    (8) action1 -> VOLUME DOWN .
+
+    $end            reduce using rule 8 (action1 -> VOLUME DOWN .)
+
+
+state 13
+
+    (7) action1 -> VOLUME UP .
+
+    $end            reduce using rule 7 (action1 -> VOLUME UP .)
+
+
+state 14
+
+    (6) action1 -> TURN OFF .
+
+    $end            reduce using rule 6 (action1 -> TURN OFF .)
+
+
+state 15
+
+    (5) action1 -> TURN ON .
+
+    $end            reduce using rule 5 (action1 -> TURN ON .)
+
+
+state 16
+
+    (11) action2 -> CHANGE CHANNEL .
+
+    NUMBER          reduce using rule 11 (action2 -> CHANGE CHANNEL .)
+
+
+state 17
+
+    (10) action1 -> SPEED DOWN .
+
+    $end            reduce using rule 10 (action1 -> SPEED DOWN .)
+
+
+state 18
+
+    (9) action1 -> SPEED UP .
+
+    $end            reduce using rule 9 (action1 -> SPEED UP .)
+

@@ -1,0 +1,2 @@
+F:\ioes\ioes_Server\obj\Debug\ioes_Server.njsprojResolveAssemblyReference.cache
+F:\ioes\ioes_Server\bin\Microsoft.NodejsTools.WebRole.dll

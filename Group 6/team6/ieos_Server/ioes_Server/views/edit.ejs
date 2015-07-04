@@ -1,0 +1,62 @@
+﻿<!doctype html>
+<html>
+  <head>
+    <title>Smart Home</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+      <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+        <style>
+          body         { padding-top:80px; word-wrap:break-word; }
+        </style>
+      </head>
+  <body>
+    <div class="container">
+
+      <div class="page-header text-center">
+        <h1>
+          <span class="fa fa-pencil-square-o"></span> Edit Page
+        </h1>
+        <a href="/logout" class="btn btn-default btn-sm">Logout</a>
+
+      </div>
+      <form action="/edit" method="post">
+      <table  class ="table table-hover">
+        <thead>
+          <tr>
+            <td>User</td>
+            <% for (var i in devices_list){%>
+            <td>
+              <%= devices_list[i].device_name%>
+            </td>
+            <% }%>
+			<td>
+			</td>
+          </tr>
+        </thead>
+        <tbody>
+        <% for (var i in user){%>
+          <% if (user[i].local.permission == 'normal'){ %>
+            <tr>
+              <td><%= user[i].local.name%>          
+              </td>
+              <%  for(var j in devices_list)  {%>
+                <%if (user[i].local.allow_devices.indexOf(devices_list[j].device_name)==-1){%>
+                  <td><input type="checkbox"  name=<%= user[i].local.name%> value=<%= devices_list[j].device_name%> ></input></td>
+                <%}else{%>
+                  <td><input type="checkbox" checked="checked" name=<%= user[i].local.name%> value=<%= devices_list[j].device_name%>></input></td>
+                <%}%>
+
+              <% } %>
+			  <td>
+				<a href="/delete/<%= user[i].local.name%>"><i class="fa fa-trash-o"></i></a>
+			  </td>
+            </tr>
+          <% } %>  
+        <% } %>
+        </tbody>
+
+      </table>
+      <button type="submit" class="btn btn-warning btn-lg">Check</button>
+      </form>
+    </div>
+  </body>
+</html>
